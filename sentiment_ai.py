@@ -1,41 +1,56 @@
-from sklearn.datasets import fetch_20newsgroups
+# AI Sentiment Analysis with Accuracy
+# Author: Fawwaz Khatami
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# 1. Load dataset (2 kategori biar simpel)
-categories = ['rec.sport.baseball', 'sci.med']
-data = fetch_20newsgroups(categories=categories)
+# Training data
+train_texts = [
+    "I love this product",
+    "This is amazing",
+    "I am very happy",
+    "I hate this",
+    "This is terrible",
+    "Very bad experience"
+]
 
-X = data.data
-y = data.target
+train_labels = [
+    "positive", "positive", "positive",
+    "negative", "negative", "negative"
+]
 
-# 2. Ubah teks jadi angka
-vectorizer = CountVectorizer(stop_words='english')
-X_vectorized = vectorizer.fit_transform(X)
+# Testing data
+test_texts = [
+    "I am happy",
+    "This product is bad",
+    "Amazing experience",
+    "I hate it"
+]
 
-# 3. Split data (training & testing)
-X_train, X_test, y_train, y_test = train_test_split(
-    X_vectorized, y, test_size=0.2, random_state=42
-)
+test_labels = [
+    "positive", "negative", "positive", "negative"
+]
 
-# 4. Train model AI
+# Vectorization
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(train_texts)
+X_test = vectorizer.transform(test_texts)
+
+# Model training
 model = MultinomialNB()
-model.fit(X_train, y_train)
+model.fit(X_train, train_labels)
 
-# 5. Evaluasi model
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
+# Prediction & accuracy
+predictions = model.predict(X_test)
+accuracy = accuracy_score(test_labels, predictions)
 
-print("Model accuracy:", accuracy)
+print("AI Sentiment Model Ready")
+print("Model Accuracy:", round(accuracy * 100, 2), "%")
 
-# 6. Tes manual
-sample_text = ["This treatment really helped me recover faster"]
-sample_vector = vectorizer.transform(sample_text)
-prediction = model.predict(sample_vector)
+# Interactive input
+user_text = input("Enter a sentence: ")
+user_vector = vectorizer.transform([user_text])
+result = model.predict(user_vector)
 
-if prediction[0] == 0:
-    print("Prediction: Baseball-related (Negative class)")
-else:
-    print("Prediction: Medical-related (Positive class)")
+print("Sentiment prediction:", result[0])
