@@ -1,24 +1,30 @@
 # AI Sentiment Analysis
 
-This project is a simple **Sentiment Analysis system** built using **Python** and basic **Machine Learning** techniques.  
-It classifies text input into **positive** or **negative** sentiment.
+A simple **Sentiment Analysis project** built using **Python** and Machine Learning.
 
-## 🔍 Project Overview
-The goal of this project is to understand how machines can analyze human language and emotions using data-driven methods.  
-This project demonstrates the fundamentals of **Natural Language Processing (NLP)** and **AI classification models**.
+### What it does
 
-## 🛠 Technologies Used
-- Python
-- Scikit-learn
-- Natural Language Processing (NLP)
-- Naive Bayes Classifier
-- Git & GitHub
+The project analyzes text and classifies it as:
 
-## ⚙ How It Works
-1. Text data is converted into numerical features using vectorization.
-2. A Naive Bayes model is trained on labeled sentiment data.
-3. The model predicts whether a sentence is positive or negative.
+* Positive
+* Negative
 
-## 🚀 How to Run
+### Technologies
+
+* Python
+* Scikit-learn
+* NLP
+* Naive Bayes
+* Git & GitHub
+
+### How it works
+
+1. The text is converted into numerical data.
+2. The model learns from labeled text data.
+3. The model predicts whether new text is positive or negative.
+
+### Run the Project
+
 ```bash
 python sentiment_ai.py
+```
